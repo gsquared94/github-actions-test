@@ -30,7 +30,7 @@ jobs:
     # Switches Docker to run linux containers
     - name: Switch to Linux containers
       run: |
-        & C:\Program Files\Docker\Docker\DockerCli.exe -SwitchLinuxEngine
+        & "C:\Program Files\Docker\Docker\DockerCli.exe" -SwitchLinuxEngine
     
     #Starts Kind cluster in linux container
     - name: Start Kind cluster
