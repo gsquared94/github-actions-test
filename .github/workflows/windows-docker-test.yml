@@ -25,7 +25,7 @@ jobs:
     # Installs docker
     - name: Install Linux container support
       run: |
-        choco install docker-desktop
+        choco install -ydf docker-desktop
         
     - name: Find Docker Path
       run: |
