@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Calculate Tag and release names
         run: |
-          t=${{ github.event.issue.title }}
+          t="${{ github.event.issue.title }}"
           a=($(echo "$t" | tr ' ' '\n'))
           echo ::set-env name=RELEASE_NAME::"${t}"
           echo ::set-env name=TAG_NAME::"${a[1]}"
