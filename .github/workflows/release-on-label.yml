@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [opened, reopened]
+    types: [all]
 jobs:
   build:
     if: contains(github.event.issue.labels.*.name, 'release')
