@@ -1,0 +1,37 @@
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  pr:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
+    name: Create Tag and Draft Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Calculate Tag and release names
+        run: |
+          r="${{ github.event.pull_request.title }}"
+          arr=($(echo "$r" | tr ' ' '\n'))
+          if ${#arr[@]} -ne 2; then
+          echo Malformed title for PR; failed to extract semVer tag
+          return 1
+          fi
+          t ="${a[1]}"
+          git tag -a $t -m "$t Release" && git push
+          echo ::set-env name=RELEASE_NAME::"${t}"
+          echo ::set-env name=TAG_NAME::"${a[1]}"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: true
+          prerelease: false
