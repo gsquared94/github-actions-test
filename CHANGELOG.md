@@ -1,3 +1,11 @@
+# v1.16.5 Release - 06/12/2020
+**Linux**
+`curl Lorem ipsum 16.5`
+
+Highlights:
+- `Lorem ipsum 16.5`
+- Lorem ipsum 16.5
+
 # v1.16.4 Release - 06/11/2020
 **Linux**
 `curl Lorem ipsum 16.4`
