@@ -17,12 +17,8 @@ jobs:
           echo Malformed title for PR; failed to extract semVer tag
           return 1
           fi
-          t="v${t}"
-          r="$t Release"
-          git tag -a $t -m "${r}"
-          git push
-          echo ::set-env name=TAG_NAME::"${t}"
-          echo ::set-env name=RELEASE_NAME::"${r}"
+          echo ::set-env name=TAG_NAME::"v${t}"
+          echo ::set-env name=RELEASE_NAME::"${t} Release"
           
       - name: Install gsutil
         run: |
