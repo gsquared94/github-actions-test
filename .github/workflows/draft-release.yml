@@ -43,7 +43,8 @@ jobs:
         shell: bash
         run: |
           curl -fsSL https://github.com/github/hub/raw/master/script/get | bash -s 2.14.1
-          body=$(git log -p --follow -1 CHANGELOG.md | grep '^\+' | cut -c 2- | tail -n +2)
+          git diff HEAD~2 HEAD -- CHANGELOG.md
+          body=$(git diff HEAD~2 HEAD -- CHANGELOG.md | grep '^\+' | cut -c 2- | tail -n +2)
           echo $body
           assets=()
           for asset in $HOME/${{ env.TAG_NAME }}/*; do
