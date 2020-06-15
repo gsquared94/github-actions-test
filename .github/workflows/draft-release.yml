@@ -9,7 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+        with:
+          ref: ${{ github.ref }}
+
       - name: Calculate Tag and release names
         run: |
           t=$(echo ${{ github.event.pull_request.title }} | sed -ne 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
