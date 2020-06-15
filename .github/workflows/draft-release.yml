@@ -17,16 +17,17 @@ jobs:
           echo Malformed title for PR; failed to extract semVer tag
           return 1
           fi
-          t=v$t
+          t="v$t"
           r="$t Release"
-          git tag -a $t -m $r && git push
+          git tag -a $t -m $r
+          git push
           echo ::set-env name=TAG_NAME::"${t}"
           echo ::set-env name=RELEASE_NAME::"${r}"
           
       - name: Install gsutil
         run: |
           curl -Lo $HOME/gsutil.tar.gz https://storage.googleapis.com/pub/gsutil.tar.gz
-          tar $HOME/xfz gsutil.tar.gz -C $HOME
+          tar xfz $HOME/gsutil.tar.gz -C $HOME
           echo ::add-path::$HOME/gsutil
         
       - name: Download release artifacts
